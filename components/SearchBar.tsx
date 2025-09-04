@@ -42,7 +42,7 @@ const SearchBar = () => {
     }
 
     return (
-        <div className="w-[300px] p-2">
+        <div className="w-[300px] p-2" >
             <input
                 value={inputValue}
                 onBlur={handleBlur}
@@ -54,10 +54,10 @@ const SearchBar = () => {
                 placeholder="search for your dream car"
             />
             <div className={`${showList}`}>
-                <ul className="max-h-[150px] empty:p-0 overflow-y-auto flex flex-col w-full gap-[3px] p-2 rounded-md mt-2 shadow-md">
+                <ul  className="max-h-[150px] empty:p-0 overflow-y-auto flex flex-col w-full gap-[3px] p-2 rounded-md mt-2 shadow-md">
                     {listManufacturers.map(({id , name}) => {
                         return (
-                            <li
+                            <li 
                                 key={id}
                                 className="text-sm text-gray-500 p-[2px_3px] rounded-md  hover:bg-[#0065F8] hover:text-white cursor-pointer"
                                 onClick={() => handleClick(id)}
