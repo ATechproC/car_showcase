@@ -27,6 +27,9 @@ module.exports = {
       backgroundImage: {
         'pattern': "url('/pattern.png')",
         'hero-bg': "url('/hero-bg.png')"
+      },
+      shadow : {
+        "searchBar" : "0 5px 10px rgba(0, 0, 0, 0.4)"
       }
     },
   },
