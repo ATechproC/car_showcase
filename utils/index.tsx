@@ -1,23 +1,42 @@
 import { ResultProps } from "types";
 
-export const fetchCars = async () => {
+export const fetchCars = async (object: { make: string, model: string }) => {
     try {
 
-        const response = await fetch("https://api.api-ninjas.com/v1/cars?model=camry", {
+        const response = await fetch(`https://api.api-ninjas.com/v1/cars?model=${object.model}&make=${object.make}`, {
             method: "GET",
             headers: {
                 "X-Api-Key": "0VhTPEezrHYfbuiGTYHrdw==aSLkkOt6sL1ouRa2"
             }
         });
 
+        
         const result = await response.json();
+        
+        if (result.length === 0) {
+            return [
+                {
+                    "class": "compact car",
+                    "cylinders": 4,
+                    "displacement": 1.6,
+                    "drive": "fwd",
+                    "fuel_type": "gas",
+                    "make": "toyota",
+                    "model": "corolla",
+                    "transmission": "a",
+                    "year": 1993
+                }
+            ]
+        }
 
         return result;
+
 
     } catch (err) {
         console.log(err)
     }
 }
+
 
 export const generateCarImageUrl = (car: ResultProps, angle?: string) => {
     const url = new URL("https://cdn.imagin.studio/getimage");

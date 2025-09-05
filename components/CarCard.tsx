@@ -3,12 +3,10 @@
 import Image from "next/image";
 import { Button1 } from ".";
 import { useModal } from "contexts/ModalContext";
-import { useCarDetails } from "contexts/CarDetailsModal";
 import { generateCarImageUrl } from "utils";
+import { CarDetailsProps } from "types";
 
-const CarCard = () => {
-
-    const { result } = useCarDetails();
+const CarCard = ({result} : CarDetailsProps) => {
 
     const { setModal } = useModal();
 

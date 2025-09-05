@@ -1,4 +1,4 @@
-import { MouseEventHandler } from "react";
+import React, { MouseEventHandler } from "react";
 
 export interface CustomButtonProps {
   isDisabled?: boolean;
@@ -41,4 +41,8 @@ export interface CarDetailsProps {
     //     transmission? : string;
     //     year? : number;
     // }
+}
+
+export type ProviderType = {
+  children : React.ReactNode;
 }
