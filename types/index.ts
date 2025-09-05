@@ -16,5 +16,28 @@ export interface FilterProps {
     make: string,
     model: string,
     transmission: string,
-    year: number
+    year: number,
+    class?: string,
+    cylinders?: number,
+    displacement?: number;
+}
+
+export interface ResultProps {
+  model : string;
+  transmission : string;
+  make : string;
+}
+
+export interface CarDetailsProps {
+  result: ResultProps;
+    // result : {
+    //     cylinders? : number,
+    //     displacement? : number;
+    //     drive? : string;
+    //     fuel_type? : string;
+    //     make? : string;
+    //     model? : string;
+    //     transmission? : string;
+    //     year? : number;
+    // }
 }

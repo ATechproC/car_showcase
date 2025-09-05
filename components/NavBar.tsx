@@ -1,7 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import CustomButton from "./CustomButton";
+// import CustomButton from "./CustomButton";
+
+import { Button1 } from "./CustomButton";
 
 const NavBar = () => (
     <header className='absolute z-10 w-full'>
@@ -16,11 +18,17 @@ const NavBar = () => (
                 />
             </Link>
 
-            <CustomButton
+            {/* <CustomButton
                 title='Sign in'
-                btnType='button'
-                containerStyles='text-primary-blue rounded-full bg-white min-w-[130px]'
-            />
+                // btnType='button'
+                // containerStyles='text-primary-blue rounded-full bg-white min-w-[130px]'
+            /> */}
+            <Button1
+                className='text-primary-blue rounded-full bg-white min-w-[130px]'
+                type="button"
+                >
+                Sign In
+            </Button1>
         </nav>
     </header>
 );
