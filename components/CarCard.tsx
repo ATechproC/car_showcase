@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Button1 } from ".";
 import { useModal } from "contexts/ModalContext";
 import { useCarDetails } from "contexts/CarDetailsModal";
+import { generateCarImageUrl } from "utils";
 
 const CarCard = () => {
 
@@ -18,7 +19,7 @@ const CarCard = () => {
             <h2 className="font-bold text-gray-500">{result.make ?? "loading..."} {result.model}</h2>
             <p className="text-sm text-gray-500">{result.model === undefined ? "loading..." : "$50/day" }</p>
             <div className="pt-1 ml-10 text-center">
-                {result.model === undefined ? "loading..." : <Image src={"/hero.png"} alt="car" width={150} height={150} /> }
+                {result.model === undefined ? "loading..." : <Image src={generateCarImageUrl(result)} alt="car" width={150} height={150} /> }
             </div>
             <div className="flex items-center justify-between text-[10px] mt-3 text-gray-500 ">
                 <div className="flex flex-col items-center gap-[2px]">

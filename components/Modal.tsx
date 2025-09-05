@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useModal } from "contexts/ModalContext"
 import { useEffect } from "react";
 import { useCarDetails } from "contexts/CarDetailsModal";
+import { generateCarImageUrl } from "utils";
 
 function Modal() {
 
@@ -37,17 +38,17 @@ function Modal() {
                     <div className="absolute top-0 left-0 w-full h-[100px] -z-10">
                         <Image className="w-full h-full" src={"/pattern.png"} alt="" width={200} height={200} />
                     </div>
-                    <Image className="object-contain w-full h-full" src={"/hero.png"} alt="" width={150} height={150} />
+                    <Image className="object-contain w-full h-full" src={generateCarImageUrl(result)} alt="" width={150} height={150} />
                 </div>
                 <div className="flex items-center justify-between">
                     <div className="w-[100px] h-[70px]">
-                        <Image className="object-contain w-full h-full" src={"/hero.png"} alt="" width={30} height={30} />
+                        <Image className="object-contain w-full h-full" src={generateCarImageUrl(result)} alt="" width={30} height={30} />
                     </div>
                     <div className="w-[100px] h-[70px]">
-                        <Image className="object-contain w-full h-full" src={"/hero.png"} alt="" width={30} height={30} />
+                        <Image className="object-contain w-full h-full" src={generateCarImageUrl(result, "33")} alt="" width={30} height={30} />
                     </div>
                     <div className="w-[100px] h-[70px]">
-                        <Image className="object-contain w-full h-full" src={"/hero.png"} alt="" width={30} height={30} />
+                        <Image className="object-contain w-full h-full" src={generateCarImageUrl(result, "13")} alt="" width={30} height={30} />
                     </div>
                 </div>
                 <div className="flex flex-col gap-[3px] p-3 bg-white">

@@ -26,6 +26,7 @@ export interface ResultProps {
   model : string;
   transmission : string;
   make : string;
+  year?: number;
 }
 
 export interface CarDetailsProps {
