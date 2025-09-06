@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 import { Button1 } from ".";
-import { useModal } from "contexts/ModalContext";
 import { generateCarImageUrl } from "utils";
 import { CarDetailsProps } from "types";
+import { useRouter } from "next/navigation";
 
 const CarCard = ({result} : CarDetailsProps) => {
 
-    const { setModal } = useModal();
+    const router = useRouter();
 
     if (!result) return <div>Loading...</div>;
 
@@ -35,7 +35,7 @@ const CarCard = ({result} : CarDetailsProps) => {
             </div>
             <Button1
                 className="bg-[#40A2E3] cursor-pointer  text-white p-[3px] rounded-[7px] mt-[6px] w-full"
-                onClick={() => setModal("block")}
+                onClick={() => router.push("/car-details")}
                 disabled={result.model === undefined ? true : false}
             >
                 {result.model === undefined ? "loading..." : "view more" }

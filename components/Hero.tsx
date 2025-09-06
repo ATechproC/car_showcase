@@ -4,8 +4,6 @@ import Image from "next/image";
 
 import { Button1 } from "../components";
 
-// import { Button1 } from "./CustomButton";
-
 const Hero = () => {
 
   const handleScroll = () => {
@@ -14,13 +12,6 @@ const Hero = () => {
     if (nextSection) {
       nextSection.scrollIntoView({ behavior: "smooth" });
     }
-  };
-
-  const buttonStyle = {
-    backgroundColor: "#2B59FF",
-    color: "white",
-    borderRadius: "9999px",
-    marginTop: "2.5rem",
   };
 
 
@@ -36,26 +27,12 @@ const Hero = () => {
           process.
         </p>
 
-        {/* <CustomButton
-          title="Explore Cars"
-          containerStyles="bg-primary-blue text-white rounded-full mt-10"
-          handleClick={handleScroll}
-        /> */}
-
         <Button1
-          // containerStyles="bg-primary-blue text-white rounded-full mt-10"
-          // style={buttonStyle}
-          className="m-10 text-white rounded-full px-[5px] py-[3px] bg-primary-blue"
+          className="m-10 text-white rounded-full px-[10px] py-[3px] bg-primary-blue"
           onClick={handleScroll}
         >
-          Explore Cars
+          <a href="#cars">Explore Cars</a>
         </Button1>
-        {/* 
-        <CustomButton
-          title="Explore Cars"
-          containerStyles="bg-primary-blue text-white rounded-full mt-10"
-          handleClick={handleScroll}
-        /> */}
       </div>
       <div className="hero__image-container">
         <div className="hero__image">

@@ -4,13 +4,14 @@ import React, { useState } from "react";
 import { manufacturers } from "../constants/index";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useOverlay } from "contexts/OverlayContext";
+// import { useOverlay } from "contexts/OverlayContext";
 import FilterBox from "./FilterBox";
 
 const SearchBar = () => {
+    
     const router = useRouter();
 
-    const { showLists } = useOverlay();
+    // const { setShowLists } = useOverlay();
 
     const [showList, setShowList] = useState<"block" | "hidden">("hidden");
 
@@ -19,8 +20,6 @@ const SearchBar = () => {
         model: "",
         year: "",
     });
-
-    // const [showList, setShowList] = useState<"block" | "hidden">("hidden");
 
     let listManufacturers: {
         id: number;
@@ -56,12 +55,6 @@ const SearchBar = () => {
         setShowList("hidden");
     }
 
-    // function handleBlur() {
-    //     if(inputValue !== "") {
-    //         setShowList("hidden")
-    //     }
-    // }
-
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -72,7 +65,7 @@ const SearchBar = () => {
             +inputValue.year > 2023 ||
             +inputValue.year < 2015
         ) {
-            alert("Please choose a car model");
+            alert("Please fill  enter valid data");
         } else {
             getModel();
         }
@@ -85,12 +78,14 @@ const SearchBar = () => {
 
     return (
         <>
-            <form className="w-[610px] p-2" onSubmit={handleSubmit}>
-                <div className="relative flex items-center gap-[2px]">
+            <form id="cars"
+             className="w-[90%] p-2 m-auto scroll-mt-[65px]" onSubmit={handleSubmit}>
+                <div className="relative flex flex-col md:flex-row sm:items-center gap-2 md:gap-[2px]">
                     <input
                         value={inputValue.make}
-                        // onBlur={handleBlur}
-                        onFocus={() => setShowList("block")}
+                        onFocus={() => {
+                            setShowList("block");
+                        }}
                         onChange={(e) => {
                             setInputValue({
                                 ...inputValue,
@@ -111,11 +106,16 @@ const SearchBar = () => {
                         className="w-[100%] z-10 p-2 text-slate-400 bg-gray-100 rounded-md outline-none focus:border focus:border-gray-500"
                         placeholder="search for the model"
                     />
-                    <FilterBox value={inputValue} setValue={setInputValue} />
-                    <button type="submit">
-                        <span className="grid place-items-center absolute bg-gray-100 cursor-pointer z-10 top-[50%] -translate-y-[50%] -right-7 h-full ">
+                    <div className="flex items-center justify-between">
+                        <FilterBox value={inputValue} setValue={setInputValue} />
+                        <button className="px-3 py-1 text-white bg-[#0065F8] cursor-pointer rounded-lg md:hidden" type="submit">
+                            Search
+                        </button>
+                    </div>
+                    <button type="submit" className="hidden md:block"
+                    >
+                        <span className="grid place-items-center h-full absolute bg-gray-100 cursor-pointer z-10 top-[50%] -translate-y-[50%] -right-7 ">
                             <Image
-                                // className="absolute top-[50%] -translate-y-[50%]"
                                 src={"./magnifying-glass.svg"}
                                 alt=""
                                 width={27}
@@ -125,8 +125,8 @@ const SearchBar = () => {
                     </button>
                 </div>
 
-                <div className={`${showList} relative z-10 w-[50%]`}>
-                    <ul className="max-h-[150px] absolute z-10 bg-white empty:p-0 overflow-y-auto flex flex-col w-full gap-[3px] p-2 rounded-md mt-2 shadow-md">
+                <div className={`${showList} relative z-10 w-[50%] p-3`}>
+                    <ul className="max-h-[150px] absolute md:top-0 bottom-[180px] h-fit -left-[1px] z-10 bg-white empty:p-0 overflow-y-auto flex flex-col w-full gap-[3px] p-2 rounded-md mt-1 shadow-md">
                         {listManufacturers.map(({ id, name }) => {
                             return (
                                 <li

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Button1 } from "./CustomButton";
 
 const NavBar = () => (
-    <header className='absolute z-10 w-full'>
+    <header className='fixed top-0 z-30 w-full bg-white'>
         <nav className='max-w-[1440px] mx-auto flex justify-between items-center sm:px-16 px-6 py-4 bg-transparent'>
             <Link href='/' className='flex items-center justify-center'>
                 <Image
