@@ -1,18 +1,18 @@
 import { ResultProps } from "types";
 
-export const fetchCars = async (object: { make: string, model: string }) => {
+export const fetchCars = async (object: { make: string, model: string, year: string }) => {
     try {
 
-        const response = await fetch(`https://api.api-ninjas.com/v1/cars?model=${object.model}&make=${object.make}`, {
+        const response = await fetch(`https://api.api-ninjas.com/v1/cars?model=${object.model}&make=${object.make}&year=${object.year}`, {
             method: "GET",
             headers: {
                 "X-Api-Key": "0VhTPEezrHYfbuiGTYHrdw==aSLkkOt6sL1ouRa2"
             }
         });
 
-        
+
         const result = await response.json();
-        
+
         if (result.length === 0) {
             return [
                 {

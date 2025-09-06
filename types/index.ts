@@ -31,16 +31,6 @@ export interface ResultProps {
 
 export interface CarDetailsProps {
   result: ResultProps;
-    // result : {
-    //     cylinders? : number,
-    //     displacement? : number;
-    //     drive? : string;
-    //     fuel_type? : string;
-    //     make? : string;
-    //     model? : string;
-    //     transmission? : string;
-    //     year? : number;
-    // }
 }
 
 export type ProviderType = {

@@ -14,10 +14,11 @@ export const CarDetailsProvider = ({ children }: ProviderType) => {
     const searchParams = useSearchParams();
     const manufacturer = searchParams.get("manufacturer");
     const model = searchParams.get("model");
+    const year = searchParams.get("year");
 
     useEffect(() => {
         
-        const fetchData = async (object : {make : string, model : string}) => {
+        const fetchData = async (object : {make : string, model : string, year : string}) => {
 
             try {
                 const data = await fetchCars(object);
@@ -29,9 +30,10 @@ export const CarDetailsProvider = ({ children }: ProviderType) => {
         // fetchData({model : "civic"});
         fetchData({
             make : manufacturer || "toyota",
-            model : model || "corolla"
+            model : model || "corolla",
+            year : year || "2023"
         });
-    }, [manufacturer, model]);
+    }, [manufacturer, model, year]);
 
     return <CarDetailsContext.Provider value={{ result }} >
         {children}

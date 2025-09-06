@@ -3,17 +3,17 @@
 import { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
 
 type OverlayProps = {
-    showList : "hidden" | "block";
-    setShowList : Dispatch<SetStateAction<"hidden" | "block">>
+    showLists : "hidden" | "block";
+    setShowLists : Dispatch<SetStateAction<"hidden" | "block">>
 }
 
 const OverlayContext = createContext({} as OverlayProps)
 
 export const OverlayProvider = ({children} : {children : React.ReactNode}) => {
 
-    const [showList, setShowList] = useState<"block" | "hidden">("hidden");
+    const [showLists, setShowLists] = useState<"block" | "hidden">("hidden");
 
-    return <OverlayContext.Provider value={{showList, setShowList}}>
+    return <OverlayContext.Provider value={{showLists, setShowLists}}>
         {children}
     </OverlayContext.Provider>
 }
