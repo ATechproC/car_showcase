@@ -1,8 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-
-// import CustomButton from "./CustomButton";
-
 import { Button1 } from "./CustomButton";
 
 const NavBar = () => (
@@ -17,12 +14,6 @@ const NavBar = () => (
                     className='object-contain'
                 />
             </Link>
-
-            {/* <CustomButton
-                title='Sign in'
-                // btnType='button'
-                // containerStyles='text-primary-blue rounded-full bg-white min-w-[130px]'
-            /> */}
             <Button1
                 className='text-primary-blue rounded-full bg-white min-w-[130px]'
                 type="button"

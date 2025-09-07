@@ -27,7 +27,6 @@ export const CarDetailsProvider = ({ children }: ProviderType) => {
                 console.log(err);
             }
         }
-        // fetchData({model : "civic"});
         fetchData({
             make : manufacturer || "toyota",
             model : model || "corolla",

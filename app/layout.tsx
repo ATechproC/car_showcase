@@ -4,7 +4,8 @@ import { Metadata } from "next";
 import { Footer, NavBar } from "../components";
 import { CarDetailsProvider } from "contexts/CarDetailsModal";
 import { OverlayProvider } from "contexts/OverlayContext";
-import Top from "@components/Top";
+import Top from "@components/TopComponent";
+import { InfoFormProvider } from "contexts/InfoFormContext";
 
 export const metadata: Metadata = {
   title: "Car Hub",
@@ -17,10 +18,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className='relative'>
         <CarDetailsProvider>
           <OverlayProvider>
-            <NavBar />
-            <Top />
-            {children}
-            <Footer />
+            <InfoFormProvider>
+              <NavBar />
+              <Top />
+              {children}
+              <Footer />
+            </InfoFormProvider>
           </OverlayProvider>
         </CarDetailsProvider>
       </body>

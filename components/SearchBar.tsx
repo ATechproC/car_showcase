@@ -1,57 +1,46 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState } from "react";
 import { manufacturers } from "../constants/index";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-// import { useOverlay } from "contexts/OverlayContext";
 import FilterBox from "./FilterBox";
+import { ListManufacturersProps } from "types";
+import { useInfoForm } from "contexts/InfoFormContext";
 
 const SearchBar = () => {
-    
+
     const router = useRouter();
 
-    // const { setShowLists } = useOverlay();
+    const {inputValue, dispatch} = useInfoForm();
+
+    console.log("inputValue : ", inputValue)
+
 
     const [showList, setShowList] = useState<"block" | "hidden">("hidden");
 
-    const [inputValue, setInputValue] = useState({
-        make: "",
-        model: "",
-        year: "",
-    });
-
-    let listManufacturers: {
-        id: number;
-        name: string;
-    }[] = [];
-
-    const newName = inputValue.make.toLowerCase().trim();
-
-    for (let i = 0; i < manufacturers.length; i++) {
-        if (newName !== "") {
-            if (manufacturers[i].name.toLowerCase().includes(newName)) {
-                listManufacturers[listManufacturers.length] = manufacturers[i];
+    let listManufacturers: ListManufacturersProps[] = [];
+    
+    (function ListManufacturers() {
+        const newName = inputValue.make.toLowerCase().trim();
+        for (let i = 0; i < manufacturers.length; i++) {
+            if (newName !== "") {
+                if (manufacturers[i].name.toLowerCase().includes(newName)) {
+                    listManufacturers[listManufacturers.length] = manufacturers[i];
+                }
+            } else {
+                listManufacturers = manufacturers;
             }
-        } else {
-            listManufacturers = manufacturers;
         }
-    }
+    })();
+
 
     function handleClick(id: number) {
-        for (let i = 0; i < listManufacturers.length; i++) {
-            if (listManufacturers[i].id === id) {
-                let newName = [];
-                for (let j = 0; j < listManufacturers[i].name.length; j++) {
-                    if (j === 0) newName[j] = listManufacturers[i].name[j].toUpperCase();
-                    else newName[j] = listManufacturers[i].name[j].toLowerCase();
-                }
-                setInputValue({
-                    ...inputValue,
-                    make: newName.join(""),
-                });
+        dispatch({
+            type: "handled", payload: {
+                listManufacturers, id
             }
-        }
+        })
         setShowList("hidden");
     }
 
@@ -76,10 +65,19 @@ const SearchBar = () => {
             `?manufacturer=${inputValue.make.toLowerCase()}&model=${inputValue.model.toLowerCase()}&year=${inputValue.year || 2023}`);
     };
 
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>
+    ) {
+        dispatch({ type: "changed", payload: {value : event.target.value} });
+    }
+
+    function handleChangeModel(event : React.ChangeEvent<HTMLInputElement>) {
+        dispatch({type : "changedModel", payload : {value : event.target.value}})
+    }
+
     return (
         <>
             <form id="cars"
-             className="w-[90%] p-2 m-auto scroll-mt-[65px]" onSubmit={handleSubmit}>
+                className="w-[90%] p-2 m-auto scroll-mt-[65px]" onSubmit={handleSubmit}>
                 <div className="relative flex flex-col md:flex-row sm:items-center gap-2 md:gap-[2px]">
                     <input
                         value={inputValue.make}
@@ -87,10 +85,7 @@ const SearchBar = () => {
                             setShowList("block");
                         }}
                         onChange={(e) => {
-                            setInputValue({
-                                ...inputValue,
-                                make: e.target.value,
-                            });
+                            handleChange(e);
                         }}
                         className="w-[100%] z-10 p-2 text-slate-400 bg-gray-100 rounded-md outline-none focus:border focus:border-gray-500"
                         placeholder="search for the manufacturer"
@@ -98,16 +93,13 @@ const SearchBar = () => {
                     <input
                         value={inputValue.model}
                         onChange={(e) => {
-                            setInputValue({
-                                ...inputValue,
-                                model: e.target.value,
-                            });
+                            handleChangeModel(e);
                         }}
                         className="w-[100%] z-10 p-2 text-slate-400 bg-gray-100 rounded-md outline-none focus:border focus:border-gray-500"
                         placeholder="search for the model"
                     />
                     <div className="flex items-center justify-between">
-                        <FilterBox value={inputValue} setValue={setInputValue} />
+                        <FilterBox />
                         <button className="px-3 py-1 text-white bg-[#0065F8] cursor-pointer rounded-lg md:hidden" type="submit">
                             Search
                         </button>

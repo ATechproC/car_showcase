@@ -1,8 +1,8 @@
-"use client";
+// "use client";
 
 import SearchBar from "@components/SearchBar";
 import ShowCars from "@components/ShowCars";
-import { useOverlay } from "contexts/OverlayContext";
+// import { useOverlay } from "contexts/OverlayContext";
 
 function CardContainer() {
     // const { setShowLists, showLists } = useOverlay();
@@ -13,7 +13,7 @@ function CardContainer() {
             <SearchBar />
             <ShowCars />
         </div>
-    )
+    );
 }
 
-export default CardContainer
+export default CardContainer;

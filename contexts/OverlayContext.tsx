@@ -1,11 +1,7 @@
 "use client";
 
-import { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
-
-type OverlayProps = {
-    showLists : "hidden" | "block";
-    setShowLists : Dispatch<SetStateAction<"hidden" | "block">>
-}
+import { createContext,useContext, useState } from "react";
+import { OverlayProps } from "types";
 
 const OverlayContext = createContext({} as OverlayProps)
 

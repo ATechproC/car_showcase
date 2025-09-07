@@ -1,5 +1,6 @@
-type ContainerProps = React.ComponentProps<"button">;
+import { ContainerProps } from "types";
 
-export function Button1(props : ContainerProps) {
+
+export function Button1(props: ContainerProps) {
   return <button {...props} />
 }
