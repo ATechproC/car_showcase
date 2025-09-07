@@ -1,4 +1,3 @@
-// import Modal from "@components/Modal"
 
 import CarDetails from "@components/CarDetails"
 import Link from "next/link"

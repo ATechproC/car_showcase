@@ -34,16 +34,10 @@ export function reducer(currentState: any, { type, payload }: { type: any, paylo
             };
         }
 
-        case "handleProduction": {
-            let newState;
-            for (let i = 0; i < payload.yearsOfProduction.length; i++) {
-                if (payload.yearsOfProduction[i].id === payload.id) {
-                    newState = {
-                        ...currentState, year: payload.yearsOfProduction[i].value
-                    };
-                }
+        case "selected" : {
+            return {
+                ...currentState, year : payload.value,
             }
-            return newState;
         }
 
         case "changed": {

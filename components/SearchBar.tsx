@@ -1,26 +1,24 @@
 "use client";
 
-import React, {useState } from "react";
+import React from "react";
 import { manufacturers } from "../constants/index";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import FilterBox from "./FilterBox";
 import { ListManufacturersProps } from "types";
 import { useInfoForm } from "contexts/InfoFormContext";
+import { useOverlay } from "contexts/OverlayContext";
 
 const SearchBar = () => {
 
+    const { showList, setShowList } = useOverlay();
+
     const router = useRouter();
 
-    const {inputValue, dispatch} = useInfoForm();
-
-    console.log("inputValue : ", inputValue)
-
-
-    const [showList, setShowList] = useState<"block" | "hidden">("hidden");
+    const { inputValue, dispatch } = useInfoForm();
 
     let listManufacturers: ListManufacturersProps[] = [];
-    
+
     (function ListManufacturers() {
         const newName = inputValue.make.toLowerCase().trim();
         for (let i = 0; i < manufacturers.length; i++) {
@@ -54,7 +52,7 @@ const SearchBar = () => {
             +inputValue.year > 2023 ||
             +inputValue.year < 2015
         ) {
-            alert("Please fill  enter valid data");
+            alert("⚠️ Please fill in all fields !!");
         } else {
             getModel();
         }
@@ -67,17 +65,17 @@ const SearchBar = () => {
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>
     ) {
-        dispatch({ type: "changed", payload: {value : event.target.value} });
+        dispatch({ type: "changed", payload: { value: event.target.value } });
     }
 
-    function handleChangeModel(event : React.ChangeEvent<HTMLInputElement>) {
-        dispatch({type : "changedModel", payload : {value : event.target.value}})
+    function handleChangeModel(event: React.ChangeEvent<HTMLInputElement>) {
+        dispatch({ type: "changedModel", payload: { value: event.target.value } })
     }
 
     return (
         <>
             <form id="cars"
-                className="w-[90%] p-2 m-auto scroll-mt-[65px]" onSubmit={handleSubmit}>
+                className="w-[90%] p-2 m-auto scroll-mt-[250px] md:scroll-mt-[65px]" onSubmit={handleSubmit}>
                 <div className="relative flex flex-col md:flex-row sm:items-center gap-2 md:gap-[2px]">
                     <input
                         value={inputValue.make}
@@ -117,20 +115,26 @@ const SearchBar = () => {
                     </button>
                 </div>
 
-                <div className={`${showList} relative z-10 w-[50%] p-3`}>
-                    <ul className="max-h-[150px] absolute md:top-0 bottom-[180px] h-fit -left-[1px] z-10 bg-white empty:p-0 overflow-y-auto flex flex-col w-full gap-[3px] p-2 rounded-md mt-1 shadow-md">
-                        {listManufacturers.map(({ id, name }) => {
-                            return (
-                                <li
-                                    key={id}
-                                    className="text-sm text-gray-500 p-[2px_3px] rounded-md  hover:bg-[#0065F8] hover:text-white cursor-pointer"
-                                    onClick={() => handleClick(id)}
-                                >
-                                    {name}
-                                </li>
-                            );
-                        })}
-                    </ul>
+                <div className={`${showList} relative z-10 p-3`}>
+                    <div 
+                    onClick={() => setShowList('hidden')}
+                    className={`${showList} absolute md:top-0 bottom-[170px] -left-[39px] md:-left-[65px] w-screen h-[160px]`}
+                    >
+                        <ul
+                        className="max-h-[150px] bottom-0 md:top-0 absolute h-fit left-[39px] md:left-[65px] z-10 bg-white empty:p-0 overflow-y-auto flex flex-col w-[50%] gap-[3px] p-2 rounded-md mt-1 shadow-md">
+                            {listManufacturers.map(({ id, name }) => {
+                                return (
+                                    <li
+                                        key={id}
+                                        className="text-sm text-gray-500 p-[2px_3px] rounded-md  hover:bg-[#0065F8] hover:text-white cursor-pointer"
+                                        onClick={() => handleClick(id)}
+                                    >
+                                        {name}
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
                 </div>
             </form>
         </>

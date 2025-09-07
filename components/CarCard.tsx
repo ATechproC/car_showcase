@@ -41,7 +41,7 @@ const CarCard = ({ result }: CarDetailsProps) => {
                 </div>
                 <div className="flex flex-col items-center gap-[2px]">
                     <Image src={"./tire.svg"} alt="" width={10} height={10} />
-                    {/* <div> {result.drive.toUpperCase()} </div> */}
+                    <div> FWD </div>
                 </div>
                 <div className="flex flex-col items-center gap-[2px]">
                     <Image src={"./gas.svg"} alt="" width={10} height={10} />

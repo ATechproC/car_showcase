@@ -65,6 +65,6 @@ export interface FormProps {
 }
 
 export interface OverlayProps {
-    showLists : "hidden" | "block";
-    setShowLists : Dispatch<SetStateAction<"hidden" | "block">>
+    showList : "hidden" | "block";
+    setShowList : Dispatch<SetStateAction<"hidden" | "block">>
 }
