@@ -10,7 +10,6 @@ import { useInfoForm } from "contexts/InfoFormContext";
 import { useOverlay } from "contexts/OverlayContext";
 
 const SearchBar = () => {
-
     const { showList, setShowList } = useOverlay();
 
     const router = useRouter();
@@ -32,13 +31,14 @@ const SearchBar = () => {
         }
     })();
 
-
     function handleClick(id: number) {
         dispatch({
-            type: "handled", payload: {
-                listManufacturers, id
-            }
-        })
+            type: "handled",
+            payload: {
+                listManufacturers,
+                id,
+            },
+        });
         setShowList("hidden");
     }
 
@@ -60,22 +60,26 @@ const SearchBar = () => {
 
     const getModel = () => {
         router.push(
-            `?manufacturer=${inputValue.make.toLowerCase()}&model=${inputValue.model.toLowerCase()}&year=${inputValue.year || 2023}`);
+            `?manufacturer=${inputValue.make.toLowerCase()}&model=${inputValue.model.toLowerCase()}&year=${inputValue.year || 2023
+            }`
+        );
     };
 
-    function handleChange(event: React.ChangeEvent<HTMLInputElement>
-    ) {
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         dispatch({ type: "changed", payload: { value: event.target.value } });
     }
 
     function handleChangeModel(event: React.ChangeEvent<HTMLInputElement>) {
-        dispatch({ type: "changedModel", payload: { value: event.target.value } })
+        dispatch({ type: "changedModel", payload: { value: event.target.value } });
     }
 
     return (
         <>
-            <form id="cars"
-                className="w-[90%] p-2 m-auto scroll-mt-[250px] md:scroll-mt-[65px]" onSubmit={handleSubmit}>
+            <form
+                id="cars"
+                className="w-[90%] p-2 m-auto scroll-mt-[250px] md:scroll-mt-[65px]"
+                onSubmit={handleSubmit}
+            >
                 <div className="relative flex flex-col md:flex-row sm:items-center gap-2 md:gap-[2px]">
                     <input
                         value={inputValue.make}
@@ -98,12 +102,14 @@ const SearchBar = () => {
                     />
                     <div className="flex items-center justify-between">
                         <FilterBox />
-                        <button className="px-3 py-1 text-white bg-[#0065F8] cursor-pointer rounded-lg md:hidden" type="submit">
+                        <button
+                            className="px-3 py-1 text-white bg-[#0065F8] cursor-pointer rounded-lg md:hidden"
+                            type="submit"
+                        >
                             Search
                         </button>
                     </div>
-                    <button type="submit" className="hidden md:block"
-                    >
+                    <button type="submit" className="hidden md:block">
                         <span className="grid place-items-center h-full absolute bg-gray-100 cursor-pointer z-10 top-[50%] -translate-y-[50%] -right-7 ">
                             <Image
                                 src={"./magnifying-glass.svg"}
@@ -116,12 +122,11 @@ const SearchBar = () => {
                 </div>
 
                 <div className={`${showList} relative z-10 p-3`}>
-                    <div 
-                    onClick={() => setShowList('hidden')}
-                    className={`${showList} absolute md:top-0 bottom-[170px] -left-[39px] md:-left-[65px] w-screen h-[160px]`}
+                    <div
+                        onClick={() => setShowList("hidden")}
+                        className={`${showList} absolute md:top-0 bottom-[170px] -left-[39px] md:-left-[65px] w-screen h-[160px]`}
                     >
-                        <ul
-                        className="max-h-[150px] bottom-0 md:top-0 absolute h-fit left-[39px] md:left-[65px] z-10 bg-white empty:p-0 overflow-y-auto flex flex-col w-[50%] gap-[3px] p-2 rounded-md mt-1 shadow-md">
+                        <ul className="max-h-[150px] bottom-0 md:top-0 absolute h-fit left-[39px] md:left-[65px] z-10 bg-white empty:p-0 overflow-y-auto flex flex-col w-[50%] gap-[3px] p-2 rounded-md mt-1 shadow-md">
                             {listManufacturers.map(({ id, name }) => {
                                 return (
                                     <li
